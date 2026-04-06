@@ -13,3 +13,9 @@ def verify(path):
             json.dump([],f)
 
     return DATA_FILE
+
+def return_data(path):
+    path = verify(path)
+    with open(path,"r",encoding="utf-8") as f:
+        data = json.load(f)
+    return data
