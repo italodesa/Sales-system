@@ -26,3 +26,12 @@ def write_file(path,your_data):
     path_data.append(your_data)
     with open(path,"w",encoding="utf-8") as f:
         json.dump(path_data, f, indent=4, ensure_ascii=False)
+
+def generate_id(path,object_id):
+    data = return_data(path)
+    if data:
+        last_id = max(item.get(object_id, 0) for item in data) + 1
+    else:
+        last_id = 1
+
+    return last_id
