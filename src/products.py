@@ -1,6 +1,7 @@
+from files import generate_id
 class Product:
-    def __init__(self,name,price,quantity):
-        self.product_id = None
+    def __init__(self,name,price,quantity,product_id=None):
+        self.product_id = product_id
         self.name = name
         self.price = price
         self.quantity = quantity
@@ -10,4 +11,5 @@ class Product:
         name = input("Digite o nome do produto: ")
         price = float(input("Digite o preço do produto: "))
         quantity = int(input("Digite a quantidade do produto: "))
-        return cls(name,price,quantity)
+        product_id = generate_id('products.json','product_id')
+        return cls(name,price,quantity,product_id)
