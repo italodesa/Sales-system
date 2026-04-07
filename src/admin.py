@@ -31,7 +31,7 @@ class Admin:
 
         for user in users:
             if user["password"] == password:
-                return "Ja existe um usuario com esse nome"
+                return "Ja existe um usuario com essa senha"
 
         if option == 1:
             admin = cls(name,password)
