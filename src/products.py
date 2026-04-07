@@ -1,10 +1,11 @@
 from files import generate_id
 class Product:
-    def __init__(self,name,price,quantity,product_id=None):
+    def __init__(self,name,price,quantity,status,product_id=None):
         self.product_id = product_id
         self.name = name
         self.price = price
         self.quantity = quantity
+        self.status = status
     
     @classmethod
     def create_product(cls):
