@@ -3,3 +3,4 @@ class Admin:
         self.name = name
         self.password = password
         self.admin_id = admin_id
+        self.profile = "admin"
