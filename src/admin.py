@@ -18,25 +18,28 @@ class Admin:
 
         data_admins = return_data('admin_users.json')
         data_sellers = return_data('seller_users.json')
+        users = data_admins + data_sellers
         
         name = input("Digite o nome do novo usuario: ")
         password = input("Digite uma senha: ")
         print("[1] Administrador\n[2] Vendedor")
-        option = int(input(f"O que o usuario {name} será?: "))
+
+        try:
+            option = int(input(f"O que o usuario {name} será?: "))
+        except ValueError:
+            print("Digite um numero correspondente")
+
+        for user in users:
+            if user["password"] == password:
+                return "Ja existe um usuario com esse nome"
 
         if option == 1:
-            for admin in data_admins:
-                if admin["password"] == password:
-                    return "Ja existe um administrador com essa senha"
             admin = cls(name,password)
             admin.admin_id = generate_id("admin_users.json","admin_id")
             write_file('admin_users.json',admin.__dict__)
             return f"Administrador {admin.name} criado com sucesso."
 
         elif option == 2:
-            for seller in data_sellers:
-                if seller["password"] == password:
-                    return "Já existe um vendedor com essa senha"
             seller = Seller(name,password)
             seller.seller_id = generate_id("seller_users.json","seller_id")
             write_file('seller_users.json',seller.__dict__)
