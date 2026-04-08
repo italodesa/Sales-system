@@ -1,6 +1,7 @@
 from datetime import datetime
 from sales import Sale
 from products import Product
+from files import return_data
 
 class Seller:
     def __init__(self,name,password,seller_id=None):
@@ -28,7 +29,12 @@ class Seller:
             
             match option:
                 case 1:
-                    pass
+                    Product.show_products()
+                    try:
+                        id = int(input("Digite o id do produto: "))
+                        name = input("Digite o nome do produto: ")
+                    except ValueError:
+                        print("Digite valores validos")
                 case 2:
                     pass
                 case 3:
