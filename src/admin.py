@@ -68,3 +68,32 @@ class Admin:
             return f"Vendedor {seller.name} criado com sucesso."
         else:
             return "Resposta invalida"
+        
+    def admin_menu(self):
+        while True:
+            print("-" * 50)
+            print(" " * 20 + "Admin painel" + " " * 20)
+            print("-" * 50)
+            print(f"Bem vindo {self.name}")
+            print("[1] Criar produto\n[2] Editar/inativar produto\n[3] Create new user\n[4] Sair")
+
+            try:
+                option = int(input("> "))
+            except ValueError:
+                print("Digite um valor valido")
+
+            match option:
+                case 1:
+                    self.create_product_admin()
+                case 2:
+                    id = int(input("Digite o id do produto: "))
+                    name = input("Digite o nome do produto: ")
+                    attribute = input("Qual atributo deseja alterar? (name,price,quantity,status): ")
+                    new_atribbute = input(f"Digite um novo atributo para {attribute}: ")
+                    self.edit_product(id,name,attribute,new_atribbute)
+                case 3:
+                    Admin.create_new_user()
+                case 4:
+                    break
+                case _:
+                    print("Digite uma opção valida")
