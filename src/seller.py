@@ -1,7 +1,7 @@
 from datetime import datetime
 from sales import Sale
 from products import Product
-from files import return_data
+from files import return_data,generate_id,append_file
 
 class Seller:
     def __init__(self,name,password,seller_id=None):
@@ -35,6 +35,7 @@ class Seller:
                 option = int(input("> "))
             except ValueError:
                 print("Digite uma entrada valida")
+                continue
             
             match option:
                 case 1:
@@ -49,13 +50,41 @@ class Seller:
                     if p:
                         products.append(
                             {
+                                "id": p.product_id,
                                 "name": p.name,
                                 "quantity": quantity,
                                 "price": p.price
                             }
                         )
                         total += quantity * p.price
+                    else:
+                        print("Esse produto não existe")
+                        continue
                 case 2:
-                    pass
+                    if not products:
+                        print("Não foi possivel executar a venda")
+                        continue
+                    c = input("Tem certeza que deseja confirmar a compra? (s/n): ").lower()
+                    if c == 's':
+                        sale_id = generate_id('sales.json','sale_id')
+                        seller_id = self.seller_id
+                        seller_name = self.name
+                        total_sale = total
+                        create_in = now.strftime('%d/%m/%Y')
+                        sale_products = products.copy()
+
+                        sale = Sale(
+                            sale_id,
+                            seller_id,
+                            seller_name,
+                            total_sale,
+                            create_in,
+                            sale_products
+                        )
+                        append_file('sales.json',sale.__dict__)
+                        products.clear()
+                        total = 0.0
+                        print("Venda finalizada com sucesso!")
+
                 case 3:
                     break
