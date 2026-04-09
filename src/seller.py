@@ -20,6 +20,15 @@ class Seller:
             print("-" * 50)
             print(f"Vendedor: {self.name}")
             print(f"Data: {now.strftime('%d/%m/%Y')}")
+            print("\n")
+            for product in products:
+                print(
+                    f"Produto: {product.get('name')} | "
+                    f"Quantidade: {product.get('quantity')} | "
+                    f"Preço: R$ {product.get('quantity') * product.get('price'):.2f}"
+                )
+            print(f"Total a pagar: {total}")
+            print("\n")
             print("[1] Adicionar Produto\n[2] Finalizar compra\n[3] Sair")
 
             try:
@@ -33,10 +42,20 @@ class Seller:
                     try:
                         id = int(input("Digite o id do produto: "))
                         name = input("Digite o nome do produto: ")
+                        quantity = int(input("Digite a quantidade: "))
                     except ValueError:
                         print("Digite valores validos")
+                    p = Product.return_product_obj(name,id)
+                    if p:
+                        products.append(
+                            {
+                                "name": p.name,
+                                "quantity": quantity,
+                                "price": p.price
+                            }
+                        )
+                        total += quantity * p.price
                 case 2:
                     pass
                 case 3:
                     break
-            
