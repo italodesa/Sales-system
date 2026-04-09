@@ -19,14 +19,14 @@ class Product:
     def show_products():
         products = return_data('products.json')
 
-        print("-" * 40)
-        print(f"{'ID':<10} {'NOME':<20}")
-        print("-" * 40)
+        print("-" * 60)
+        print(f"{'ID':<10} {'NOME':<20} {'QUANTIDADE':<15}")
+        print("-" * 60)
 
         for product in products:
-            print(f"{product['product_id']:<10} {product['name']:<20}")
+            print(f"{product['product_id']:<10} {product['name']:<20} {product['quantity']:<15}")
 
-        print("-" * 40)
+        print("-" * 60)
 
     @classmethod
     def return_product_obj(cls,product_name,product_id):
