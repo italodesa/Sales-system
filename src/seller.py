@@ -51,7 +51,7 @@ class Seller:
                         if p.quantity < quantity:
                             print("Quantidade insuficiente")
                             continue
-                        
+
                         products.append(
                             {
                                 "id": p.product_id,
@@ -85,10 +85,25 @@ class Seller:
                             create_in,
                             sale_products
                         )
-                        append_file('sales.json',sale.__dict__)
-                        products.clear()
-                        total = 0.0
-                        print("Venda finalizada com sucesso!")
+                        sucess = True
+                        for product in products:
+                            p = Product.return_product_obj(product["name"],product["id"])
+                            if not p or p.quantity < product["quantity"]:
+                                sucess = False
+                                break
+                        if sucess:
+                            for product in products:
+                                p = Product.return_product_obj(product["name"],product["id"])
+                                p.remove_stock(product["quantity"])
+                                if p.quantity == 0:
+                                    p.status = "inactive"
+
+                            append_file('sales.json',sale.__dict__)
+                            products.clear()
+                            total = 0.0
+                            print("Venda finalizada com sucesso!")
+                        else:
+                            print("Não foi possivel concluir a venda")
 
                 case 3:
                     break
