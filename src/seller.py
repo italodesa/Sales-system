@@ -16,7 +16,7 @@ class Seller:
         while True:
             now = datetime.now()
             print("-" * 50)
-            print(" " * 20 + "painel de venda" + " " * 20)
+            print(" " * 20 + "Venda" + " " * 20)
             print("-" * 50)
             print(f"Vendedor: {self.name}")
             print(f"Data: {now.strftime('%d/%m/%Y')}")
@@ -46,6 +46,7 @@ class Seller:
                         quantity = int(input("Digite a quantidade: "))
                     except ValueError:
                         print("Digite valores validos")
+                        continue
                     p = Product.return_product_obj(name,id)
                     if p:
                         if p.quantity < quantity:
@@ -107,3 +108,27 @@ class Seller:
 
                 case 3:
                     break
+
+    def seller_menu(self):
+        while True:
+            now = datetime.now()
+            print("-" * 50)
+            print(" " * 20 + "Painel de vendas" + " " * 20)
+            print("-" * 50)
+            print(f"Bem vindo {self.name}")
+            print(f"data:{now.strftime('%d/%m/%Y')}")
+            print("[1] Criar venda\n[2] Sair")
+
+            try:
+                option = int(input("> "))
+            except ValueError:
+                print("Digite um valor valido")
+                continue
+
+            match option:
+                case 1:
+                    self.create_sale()
+                case 2:
+                    break
+                case _:
+                    print("Digite uma opção valida")
