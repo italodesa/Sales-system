@@ -48,6 +48,10 @@ class Seller:
                         print("Digite valores validos")
                     p = Product.return_product_obj(name,id)
                     if p:
+                        if p.quantity < quantity:
+                            print("Quantidade insuficiente")
+                            continue
+                        
                         products.append(
                             {
                                 "id": p.product_id,
