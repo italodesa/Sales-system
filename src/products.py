@@ -6,7 +6,15 @@ class Product:
         self.price = price
         self.quantity = quantity
         self.status = "active"
-    
+
+    def remove_stock(self,quantity):
+        if quantity <= 0:
+            print("Quantidade invalida")
+            return False
+        if quantity <= self.quantity:
+            self.quantity -= quantity
+            return True
+
     @classmethod
     def create_product(cls):
         name = input("Digite o nome do produto: ")
