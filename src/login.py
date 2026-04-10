@@ -40,4 +40,3 @@ def main_menu():
                 user["seller_id"],
             )
             seller.seller_menu()
-main_menu()

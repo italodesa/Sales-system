@@ -1,4 +1,4 @@
-from files import generate_id,return_data
+from files import generate_id,return_data,save_file
 class Product:
     def __init__(self,name,price,quantity,product_id=None):
         self.product_id = product_id
@@ -13,6 +13,15 @@ class Product:
             return False
         if quantity <= self.quantity:
             self.quantity -= quantity
+            
+            products = return_data('products.json')
+
+            for product in products:
+                if product["product_id"] == self.product_id:
+                    product["quantity"] = self.quantity
+                    break
+
+            save_file('products.json', products)
             return True
 
     @classmethod
