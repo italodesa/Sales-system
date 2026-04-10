@@ -21,11 +21,10 @@ O **Sales system** é um sistema interno para **gestão de produtos** e **regist
 
 - **Admin**
     - Cadastra, edita e inativa produtos.
-    - Visualiza relatórios e configurações do sistema (opcional neste MVP).
+    - Criar usuarios
 - **Vendedor**
     - Consulta o catálogo de produtos.
     - Registra vendas.
-    - Consulta as próprias vendas.
 
 ## Escopo (MVP)
 
@@ -37,12 +36,12 @@ O **Sales system** é um sistema interno para **gestão de produtos** e **regist
 2. **Produtos (Admin)**
     - Cadastrar produto.
     - Editar produto.
+    - Criar usuarios
     - Listar e buscar produtos.
     - Inativar produto (em vez de excluir).
 3. **Vendas (Vendedor)**
     - Registrar venda com itens e quantidades.
     - Calcular total.
-    - Listar vendas (pelo menos as do próprio vendedor).
 
 ### Fora do escopo (por enquanto)
 
@@ -57,7 +56,7 @@ O **Sales system** é um sistema interno para **gestão de produtos** e **regist
 
 ### RF-01 — Login
 
-- O sistema deve permitir que um usuário autentique com e-mail e senha.
+- O sistema deve permitir que um usuário autentique com nome e senha.
 
 ### RF-02 — Permissões por perfil
 
@@ -67,32 +66,22 @@ O **Sales system** é um sistema interno para **gestão de produtos** e **regist
 
 - O Admin deve poder cadastrar um produto com:
     - Nome
-    - Descrição (opcional)
     - Preço
     - Status (Ativo ou Inativo)
     - quantidade
 
-### RF-04 — Listagem e busca de produtos
-
-- O sistema deve listar produtos com filtros por nome e status.
-
-### RF-05 — Registro de vendas (Vendedor)
+### RF-04 — Registro de vendas (Vendedor)
 
 - O Vendedor deve poder criar uma venda contendo:
     - Data e hora
     - Itens (produto, quantidade, preço unitário no momento da venda)
     - Total calculado
 
-### RF-06 — Consulta de vendas
-
-- O Vendedor deve conseguir listar e visualizar detalhes das próprias vendas.
-- O Admin pode visualizar todas as vendas.
-
 ---
 
 ## Requisitos não funcionais
 
-- **RNF-01 (Auditoria):** registrar quem criou/alterou produtos e vendas.
+- **RNF-01 (Auditoria):** registrar quem criou vendas.
 - **RNF-02 (Usabilidade):** fluxo de venda deve ser rápido, com busca de produto.
 - **RNF-03 (Desempenho):** listagens devem paginar.
 
@@ -114,33 +103,23 @@ O **Sales system** é um sistema interno para **gestão de produtos** e **regist
 - **Usuário**
     - id
     - nome
-    - email
     - senha
     - perfil (ADMIN, VENDEDOR)
-    - ativo
-    - criadoEm
 - **Produto**
     - id
     - nome
-    - descricao
     - preco
     - status (ATIVO, INATIVO)
-    - criadoPor (userId)
-    - criadoEm
-    - atualizadoEm
 - **Venda**
     - id
     - vendedorId (userId)
     - total
     - criadoEm
 - **ItemVenda**
-    - id
-    - vendaId
     - produtoId
+    - nome
     - quantidade
-    - precoUnitario
-    - subtotal
-
+    - preço
 ---
 
 ## Telas (MVP)
@@ -151,8 +130,6 @@ O **Sales system** é um sistema interno para **gestão de produtos** e **regist
     - Cadastro/Edição (apenas Admin)
 - Vendas
     - Nova venda (apenas Vendedor)
-    - Minhas vendas
-    - Detalhe da venda
 
 ## Fluxos principais
 
@@ -179,4 +156,3 @@ O **Sales system** é um sistema interno para **gestão de produtos** e **regist
 - Vendedor não consegue acessar telas/ações de cadastro de produtos.
 - Vendedor consegue registrar uma venda com 1 ou mais itens.
 - O total é calculado corretamente.
-- Produtos inativos não aparecem como vendáveis.
