@@ -17,6 +17,10 @@ Criar um sistema simples de venda de produtos, com cadastro e comercialização,
 
 O **Sales system** é um sistema interno para **gestão de produtos** e **registro de vendas**.
 
+## Como criar o primeiro usuario
+
+importe de admin a classe Admin e use o método Admin.create_new_user().
+
 ### Perfis de usuário
 
 - **Admin**
